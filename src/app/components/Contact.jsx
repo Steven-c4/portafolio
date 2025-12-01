@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Github, Instagram } from 'lucide-react';
+import { Github, Instagram, Mail } from 'lucide-react'; // <--- Agregué Mail
 
 const Hero = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -65,10 +65,18 @@ const Hero = () => {
           >
             {discordIcon}
           </a>
+          
+          {/* AQUÍ AGREGUÉ EL CORREO (PC) */}
+          <a 
+            href="mailto:stevenalfaro505@gmail.com" 
+            className="w-12 h-12 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-full flex items-center justify-center hover:bg-red-600 hover:border-red-400 transition-all duration-300 group"
+          >
+            <Mail size={20} className="text-slate-300 group-hover:text-white" />
+          </a>
         </div>
 
         {/* Social Media Links - Mobile Version */}
-        <div className="flex lg:hidden justify-center gap-4 mt-12">
+        <div className="flex lg:hidden justify-center gap-4 mt-12 flex-wrap">
           <a 
             href="https://github.com/Steven-c4" 
             target="_blank" 
@@ -102,6 +110,14 @@ const Hero = () => {
             className="w-12 h-12 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-full flex items-center justify-center hover:bg-indigo-600 transition-all duration-300"
           >
             {discordIcon}
+          </a>
+
+          {/* AQUÍ AGREGUÉ EL CORREO (MOVIL) */}
+          <a 
+            href="mailto:stevenalfaro505@gmail.com" 
+            className="w-12 h-12 bg-slate-800/80 backdrop-blur-sm border border-slate-600/50 rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300"
+          >
+            <Mail size={20} className="text-slate-300" />
           </a>
         </div>
       </div>

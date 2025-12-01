@@ -1,62 +1,153 @@
+'use client';
+
 import React from 'react';
-import { Calendar, Globe } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Briefcase, GraduationCap, Calendar, ExternalLink } from 'lucide-react';
 
 const Experience = () => {
-  const experiences = [
+  // EDUCATION DATA (Based on your profile)
+  const education = [
     {
-      position: "Java App Testing and Development Analyst",
-      company: "Sherwin Williams Central America",
-      companyLink: "https://www.sherwin-williams.com/",
-      period: "2022 - 2022",
-      description: `Development and testing of an internal Java (Android Studio) application, focused on improving purchase and sales management.
-- Collaboration with the development team to ensure high-quality standards, identify critical errors, and maintain detailed documentation.
-- Execution of thorough testing and preparation of comprehensive reports on software performance and functionality.
-- Creation of user manuals and operation guides to facilitate employee adoption of the application.
-- Development of technical skills in software testing and understanding of how technology can optimize operational processes.`,
+      title: "Technical Software Engineering",
+      place: "ITCA-FEPADE",
+      period: "2024 - Present",
+      desc: "Second-year student. Comprehensive training in web development, databases, and server administration."
     },
     {
-      position: "Software Developer – Recicladora Fernández",
-      company: "Freelance Project",
-      companyLink: "",
+      title: "Cisco Networking Essentials",
+      place: "Cisco Networking Academy",
+      period: "2023",
+      desc: "Certification in networking fundamentals, communication protocols, and basic security."
+    }
+  ];
+
+  // WORK EXPERIENCE DATA (Translated to English)
+  const work = [
+    {
+      title: "Software Developer",
+      place: "Recicladora Fernández (Freelance Project)",
       period: "2025",
-      description: `Implementation of a comprehensive control system for the company, including client and vendor registration, purchase and product management, full billing system, and financial reports.
-- Development using Laravel, with interface design in CSS and MySQL database.
-- Creation of a functional and scalable system tailored to the specific needs of the recycling company.`,
+      desc: `Implementation of a comprehensive management system for a recycling company, including modules for clients, providers, purchases, products, billing, and financial reports.
+
+      • Backend development with PHP using Laravel, optimizing system architecture, scalability, and security.
+      • Frontend development with Vue.js, creating a modern, dynamic interface focused on a fluid user experience.
+      • MySQL database configuration and administration, ensuring data integrity and efficiency.
+      • Delivery of a functional, customizable solution aligned with the company's operational processes, ready for future electronic billing integration.`,
+      link: null
     },
+    {
+      title: "Java App Testing and Development Analyst",
+      place: "Sherwin Williams Central America",
+      period: "2022",
+      desc: `Active participation in testing and improving an internal Java (Android Studio) application to optimize purchase and sales management.
+
+      • Collaboration with the development team in identifying, documenting, and resolving critical errors.
+      • Creation of performance reports and user manuals, facilitating system adoption by staff.
+      • Strengthening of software testing skills, ensuring the quality and functionality of the final product.`,
+      link: "https://www.sherwin-williams.com/"
+    }
   ];
 
   return (
-    <section id="experience" className="py-16 bg-slate-800/30">
-      <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-4">My Experience</h2>
-        <p className="text-slate-300 text-center mb-12 max-w-2xl mx-auto">
-          I adapt quickly to diverse work environments, leveraging my skills and experience to deliver effective and comprehensive software solutions.
-        </p>
+    <section id="experience" className="py-24 bg-blacktext-white">
+      <div className="container mx-auto px-6 lg:px-20 max-w-6xl">
         
-        <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <div key={index} className="bg-slate-700/30 rounded-xl p-6 hover:bg-slate-700/50 transition-all duration-300 border border-slate-600/30">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-blue-400">{exp.position}</h3>
-                  {exp.companyLink ? (
-                    <p className="text-slate-300">
-                      <a href={exp.companyLink} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-300">
-                        {exp.company}
-                      </a>
-                    </p>
-                  ) : (
-                    <p className="text-slate-300">{exp.company}</p>
-                  )}
-                </div>
-                <div className="flex items-center gap-2 text-slate-400 mt-2 md:mt-0">
-                  <Calendar size={16} />
-                  {exp.period}
-                </div>
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold mb-4">Trajectory</h2>
+          <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
+          <p className="text-slate-400 mt-4">My academic and professional path.</p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+          
+          {/* --- LEFT COLUMN: EDUCATION --- */}
+          <div>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-slate-800 rounded-lg">
+                <GraduationCap className="text-blue-400 w-6 h-6" />
               </div>
-              <p className="text-slate-300 leading-relaxed whitespace-pre-line">{exp.description}</p>
+              <h3 className="text-2xl font-bold">Education</h3>
             </div>
-          ))}
+
+            <div className="space-y-12 border-l-2 border-slate-800 ml-4 pl-8 relative">
+              {education.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                  className="relative group"
+                >
+                  {/* Timeline Dot */}
+                  <span className="absolute -left-[41px] top-1 w-5 h-5 bg-slate-900 rounded-full border-4 border-blue-500 group-hover:bg-blue-500 transition-colors"></span>
+                  
+                  <h4 className="text-xl font-bold text-slate-100">{item.title}</h4>
+                  <div className="text-blue-400 font-medium mb-1">{item.place}</div>
+                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-4 font-mono uppercase tracking-wide">
+                    <Calendar size={12} /> {item.period}
+                  </div>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* --- RIGHT COLUMN: EXPERIENCE --- */}
+          <div>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-slate-800 rounded-lg">
+                <Briefcase className="text-green-400 w-6 h-6" />
+              </div>
+              <h3 className="text-2xl font-bold">Experience</h3>
+            </div>
+
+            <div className="space-y-12 border-l-2 border-slate-800 ml-4 pl-8 relative">
+              {work.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                  className="relative group"
+                >
+                  {/* Timeline Dot */}
+                  <span className="absolute -left-[41px] top-1 w-5 h-5 bg-slate-900 rounded-full border-4 border-green-500 group-hover:bg-green-500 transition-colors"></span>
+                  
+                  <h4 className="text-xl font-bold text-slate-100">{item.title}</h4>
+                  
+                  {/* Company Link/Text */}
+                  <div className="text-green-400 font-medium mb-1 flex items-center gap-2">
+                    {item.place}
+                    {item.link && (
+                      <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:text-green-300 transition-colors">
+                        <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-4 font-mono uppercase tracking-wide">
+                    <Calendar size={12} /> {item.period}
+                  </div>
+                  
+                  {/* Description with pre-line formatting */}
+                  <div className="text-slate-400 text-sm leading-relaxed whitespace-pre-line pl-2 border-l border-slate-700/50">
+                    {item.desc}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
