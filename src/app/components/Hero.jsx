@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Mail, Download, Github, Instagram, Terminal } from 'lucide-react'; 
 import { motion } from 'framer-motion'; 
+// 1. Importamos el hook del idioma
+import { useLanguage } from '../context/LanguageContext';
 
-// Componente para la hora local
+// Componente para la hora local (INTACTO)
 const LocalTime = () => {
   const [currentTime, setCurrentTime] = useState(null);
 
@@ -25,6 +27,29 @@ const LocalTime = () => {
 };
 
 const Hero = () => {
+  // 2. Obtenemos el idioma actual ('en' o 'es')
+  const { language } = useLanguage();
+
+  // 3. Diccionario de textos (Solo lo que se necesita traducir)
+  const t = {
+    en: {
+      greeting: "Hello, I'm",
+      role: "Software Developer",
+      description: "Passionate about creating efficient and scalable software solutions. I specialize in full-stack development with experience in modern web technologies and database management.",
+      location: "El Salvador",
+      download: "Download CV"
+    },
+    es: {
+      greeting: "Hola, soy",
+      role: "Desarrollador de Software",
+      description: "Apasionado por crear soluciones de software eficientes y escalables. Me especializo en desarrollo full-stack con experiencia en tecnologías web modernas y gestión de bases de datos.",
+      location: "El Salvador",
+      download: "Descargar CV"
+    }
+  };
+
+  const content = t[language];
+
   const discordIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71 55" className="w-6 h-6 fill-current text-slate-300 group-hover:text-white">
       <path d="M60.104 4.552A58.563 58.563 0 0046.91 0a41.425 41.425 0 00-1.93 3.98 55.055 55.055 0 00-16.04 0A41.513 41.513 0 0026.01 0a58.31 58.31 0 00-13.18 4.55C4.33 19.098 0 33.427 0 47.65a70.33 70.33 0 0010.78 8.77c8.033 5.88 15.61 4.815 15.61 4.815l1.785-3.057a49.016 49.016 0 01-7.64-3.78c14.165 9.78 29.712 9.78 43.892 0a48.76 48.76 0 01-7.64 3.78l1.784 3.057s7.578 1.064 15.61-4.815A70.33 70.33 0 0071 47.65c0-14.223-4.33-28.552-10.896-43.098zM29.41 37.195c-3.117 0-5.672-2.857-5.672-6.374s2.53-6.375 5.672-6.375c3.164 0 5.694 2.857 5.672 6.375 0 3.517-2.53 6.374-5.672 6.374zm12.19 0c-3.117 0-5.672-2.857-5.672-6.374s2.53-6.375 5.672-6.375c3.164 0 5.672 2.857 5.672 6.375 0 3.517-2.508 6.374-5.672 6.374z"/>
@@ -70,7 +95,7 @@ const Hero = () => {
             {/* Etiqueta Superior */}
             <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full text-blue-400 text-sm font-medium mb-6">
               <Terminal size={14} />
-              <span>Hello, I'm</span>
+              <span>{content.greeting}</span> {/* <-- CAMBIO AQUÍ */}
             </div>
 
             {/* Nombre y Rol */}
@@ -78,21 +103,19 @@ const Hero = () => {
               Steven Alfaro
             </h1>
             <h2 className="text-2xl lg:text-3xl text-slate-400 mb-6 font-light">
-              Software Developer
+              {content.role} {/* <-- CAMBIO AQUÍ */}
             </h2>
 
             {/* Bio */}
             <p className="text-lg text-slate-400 mb-8 leading-relaxed max-w-lg border-l-4 border-slate-700 pl-4">
-              Passionate about creating efficient and scalable software solutions. 
-              I specialize in full-stack development with experience in modern 
-              web technologies and database management.
+              {content.description} {/* <-- CAMBIO AQUÍ */}
             </p>
             
             {/* Info Line (Ubicación | Correo) */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 mb-10 text-slate-300 text-sm font-medium">
               <div className="flex items-center gap-2">
                 <MapPin className="text-blue-500" size={18} />
-                El Salvador
+                {content.location} {/* <-- CAMBIO AQUÍ */}
               </div>
               <div className="hidden sm:block text-slate-700">|</div>
               <div className="flex items-center gap-2">
@@ -109,13 +132,13 @@ const Hero = () => {
                   className="group relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-200 bg-blue-600 font-lg rounded-lg hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/40 focus:outline-none ring-offset-2 focus:ring-2 ring-blue-400"
                 >
                   <Download className="w-5 h-5 mr-2 group-hover:translate-y-1 transition-transform" />
-                  Download CV
+                  {content.download} {/* <-- CAMBIO AQUÍ */}
                 </a>
             </div>
 
           </motion.div>
 
-          {/* --- COLUMNA DERECHA: FOTO (MUCHO MÁS GRANDE) --- */}
+          {/* --- COLUMNA DERECHA: FOTO --- */}
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -125,7 +148,7 @@ const Hero = () => {
             {/* Efecto de brillo detrás de la foto */}
             <div className="absolute inset-0 bg-blue-500/20 blur-[100px] rounded-full"></div>
             
-            {/* TAMAÑO AUMENTADO AQUÍ: lg:w-[500px] lg:h-[500px] */}
+            {/* TAMAÑO AUMENTADO */}
             <div className="relative w-80 h-80 lg:w-[500px] lg:h-[500px]">
                {/* Borde decorativo */}
               <div className="absolute inset-0 rounded-full border-2 border-slate-700/50"></div>
@@ -133,7 +156,7 @@ const Hero = () => {
               {/* Imagen recortada en círculo */}
               <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#0B1120] shadow-2xl">
                 <img 
-                  src="/images/yo.png" 
+                  src="/images/WhatsApp Image 2026-01-19 at 8.39.32 PM.jpeg" 
                   alt="Steven Alfaro" 
                   className="w-full h-full object-cover"
                 />
